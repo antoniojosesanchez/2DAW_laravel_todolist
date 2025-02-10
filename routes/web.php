@@ -9,16 +9,20 @@ use App\Http\Controllers\EtiquetaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('inicio') ;
-
+Route::view('/main', 'main')->middleware('auth')->name('main') ;
 
 # rutas ETIQUETA
 Route::group(['controller' => EtiquetaController::class,
+              'middleware' => ['auth'],
+              'prefix'     => 'etiqueta',
               'as'         => 'etiqueta.' ], function() 
 {
     Route::get('/', 'listar')->name('listar') ;
     Route::get('/borrar/{etiqueta}', 'borrar')->name('borrar') ;
+
     Route::match(['get', 'post'], '/nueva', 'nueva')->name('nueva') ;
+    Route::match(['get', 'post'], '/editar/{etiqueta}', 'editar')->name('editar') ;
+    
 }) ;
 
 
@@ -38,5 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';

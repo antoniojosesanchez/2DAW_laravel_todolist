@@ -5,6 +5,11 @@
 
 @extends('layouts.main')
 @section('contenido')
+
+    <h1 class="text-3xl font-bold text-[#4B5563] text-[#4B5563] my-auto mb-8">
+        @lang('todolist.msg_bienvenida', ['nombre' => 'Antonio José'])
+    </h1>
+
     <a href="{{ route('etiqueta.nueva') }}"
        class="text-white bg-[#374151] text-[#ffffff] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none dark:focus:ring-blue-800"">Nueva</a>
 
@@ -31,13 +36,23 @@
                         </span>                    
                     </td>
                     <td class=" py-5 border border-gray-200 text-center  p-4">
+                    <a href="{{ route('etiqueta.editar', $item) }}"
+                           class="text-white bg-[#374151] text-[#ffffff] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none dark:focus:ring-blue-800">
+                           @lang('todolist.btn_editar')
+                        </a>
                         <a href="{{ route('etiqueta.borrar', $item) }}"
-                           class="text-white bg-[#374151] text-[#ffffff] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none dark:focus:ring-blue-800">Borrar</a>
+                           class="text-white bg-red-500 ml-2 text-[#ffffff] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none dark:focus:ring-blue-800">
+                           @lang('todolist.btn_borrar')
+                        </a>
                     </td>
                     <!--]-->
                 </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table>       
     </div>
+
+    <h1 class="text-3xl font-bold text-[#4B5563] text-[#4B5563] my-auto mb-8">
+        {{ trans_choice('todolist.msg_registros', $etiquetas->count(), ['num' => $etiquetas->count()]) }}
+    </h1>
 @endsection

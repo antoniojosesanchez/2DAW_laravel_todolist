@@ -9,10 +9,10 @@
 <div class="flex flex-col space-y-4 p-4 border rounded-lg shadow-md max-w-md mx-auto bg-white">
 
     <h1 class="text-3xl font-bold text-[#4B5563] text-[#4B5563] my-auto">
-        {{ __('todolist.tit_nueva_etiqueta') }}
+        {{ __('todolist.tit_editar_etiqueta') }}
     </h1>
 
-    <form action="{{ route('etiqueta.nueva') }}" method="post">
+    <form action="{{ route('etiqueta.editar', $etiqueta) }}" method="post">
 
         {{-- hay que añadir protección CSRF a todos los formularios POST --}}
         @csrf
@@ -23,13 +23,16 @@
             <div class="flex flex-col flex-1">
                 <input type="text" id="nombre" name="nombre" 
                     class="mt-1 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 w-full" 
-                    placeholder="{{ __('todolist.tit_nueva_etiqueta') }}"
+                    placeholder="{{ __('todolist.tit_editar_etiqueta') }}"
+                    value="{{ $etiqueta->etiqueta }}"
                     autofocus required />
             </div>
             
             {{-- color de la etiqueta --}}
             <div class="flex flex-col">
-                <input type="color" id="color" name="color" class="mt-1 w-16 h-10 border rounded-md cursor-pointer p-1">
+                <input type="color" id="color" name="color" 
+                       class="mt-1 w-16 h-10 border rounded-md cursor-pointer p-1"
+                       value="{{ $etiqueta->color }}" />
             </div>
         </div>
         

@@ -49,12 +49,40 @@ class EtiquetaController extends Controller
         # si tenemos información para crear la etiqueta:
         # validamos en primer lugar
         $request->validate([
-            'nombre' => 'string|max:20|required',
+            'nombre' => 'max:10|alpha:ascii|required',
             'color'  => 'hex_color',
         ]) ;
 
         # insertamos la etiqueta
         Etiqueta::create([
+            'etiqueta' => $request->input('nombre'),
+            'color' => $request->input('color'),
+        ]) ;
+
+        # redirigimos al listado de vistas
+        return to_route('etiqueta.listar') ;
+    }
+
+    /**
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function Editar(Request $request, Etiqueta $etiqueta)
+    {
+        # redirigimos al formulario de edición
+        if ($request->isMethod('get')) 
+            return view('etiquetas.editar' , ['etiqueta' => $etiqueta]) ;
+        
+         # si tenemos información para crear la etiqueta:
+        # validamos en primer lugar
+        $request->validate([
+            'nombre' => 'max:10|alpha:ascii|required',
+            'color'  => 'hex_color',
+        ]) ;
+
+        # insertamos la etiqueta
+        $etiqueta->update([
             'etiqueta' => $request->input('nombre'),
             'color' => $request->input('color'),
         ]) ;
