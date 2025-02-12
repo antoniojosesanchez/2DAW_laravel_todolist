@@ -24,7 +24,8 @@ class UsuarioTableSeeder extends Seeder
             'nombre'    => 'Usuario',
             'apellidos' => 'administrador',
             'email'     => 'admin@todolist.com', 
-            'password'  => Hash::make('12345678'),
+            'password'  => Hash::make('password'),
+            'admin'     => true,
         ]) ;
 
     }

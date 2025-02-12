@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('apellidos');
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('admin')->default(false) ;
             $table->string('foto')->nullable() ;
             
             $table->timestamps();

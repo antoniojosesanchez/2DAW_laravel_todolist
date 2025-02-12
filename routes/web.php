@@ -6,14 +6,23 @@
  */
 
 use App\Http\Controllers\EtiquetaController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/main', 'main')->middleware('auth')->name('main') ;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage ;
+
+# rutas PRINCIPAL
+Route::view('/main', 'main')->middleware('auth')->name('home') ;
+
+# rutas USUARIO
+Route::view('/perfil', 'usuarios.perfil')->name('perfil') ;
+Route::post('/perfil', [UsuarioController::class, "perfil"])->name('perfil.guardar') ;
+Route::get('/imagen', [UsuarioController::class, "imagen"])->name('perfil.imagen') ;
 
 # rutas ETIQUETA
 Route::group(['controller' => EtiquetaController::class,
-              'middleware' => ['auth'],
+              'middleware' => ['auth', 'admin'],
               'prefix'     => 'etiqueta',
               'as'         => 'etiqueta.' ], function() 
 {
@@ -26,16 +35,10 @@ Route::group(['controller' => EtiquetaController::class,
 }) ;
 
 
-
-
-
-
 ##
 # NO TOCAR ############################################################################################################
 ##
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

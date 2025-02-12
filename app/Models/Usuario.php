@@ -33,7 +33,7 @@ class Usuario extends Authenticatable
      * Atributos asignables en masa.
      * @var array
      */
-    protected $fillable = ['nombre', 'email', 'password', ];
+    protected $fillable = ['nombre', 'email', 'apellidos', 'password', 'foto', 'admin' ];
 
     /**
      * Atributos que se ocultan en la serialización.
@@ -47,7 +47,10 @@ class Usuario extends Authenticatable
      */
     protected function casts(): array
     {
-        return ['password' => 'hashed', ];
+        return [
+            'password' => 'hashed', 
+            'admin'    => 'bool',
+        ];
     }
 
     /**
@@ -58,4 +61,13 @@ class Usuario extends Authenticatable
     {
         return $this->hasMany(Tarea::class, 'idusu') ;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string 
+    {
+        return "{$this->nombre} {$this->apellidos}" ;
+    }
+
 }

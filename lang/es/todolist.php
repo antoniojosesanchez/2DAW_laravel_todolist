@@ -8,6 +8,7 @@
     return [
 
         # botones
+        'btn_aceptar'   => 'Aceptar',
         'btn_cancelar'  => 'Cancelar',
         'btn_guardar'   => 'Guardar',
         'btn_borrar'    => 'Borrar',
@@ -18,7 +19,16 @@
         'mnu_usuarios'  => 'Usuarios',
         'mnu_tareas'    => 'Tareas',
         'mnu_etiquetas' => 'Etiquetas',
+        'mnu_perfil'    => 'Perfil',
         'mnu_salir'     => 'Salir',
+
+        # etiquetas formularios
+        'lab_nombre'    => 'Nombre',
+        'lab_apellidos' => 'Apellido',
+        'lab_email'     => 'Email',
+        'lab_password'  => 'Password',
+        'lab_perfil'    => 'Foto de perfil',
+
 
         # mensajes
         'msg_bienvenida'        => 'Bienvenido/a, :nombre',
