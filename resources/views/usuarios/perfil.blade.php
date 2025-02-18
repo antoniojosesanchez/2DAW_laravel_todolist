@@ -59,14 +59,35 @@
             </div>
         </div>
 
+        {{-- PERFIL X (TWITTER) --}}
+        <div class="pb-2">
+            <label for="twitter" class="block mb-2 text-sm font-medium text-[#111827]">
+                @lang('todolist.lab_twitter')
+            </label>
+            <div class="relative text-gray-400">
+                <span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"></span> 
+                <input type="text" name="twitter" id="twitter" 
+                       value=""
+                       class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="@nombreusuario" autocomplete="off"
+                       required />
+            </div>
+
+            @error('twitter')
+                <div class="text-red-500 font-bold">{{ $message }}</div>
+            @enderror
+        </div>
+
         {{-- PASSWORD --}}
         <div class="pb-6">
             <label for="password" class="block mb-2 text-sm font-medium text-[#111827]">
                 @lang('todolist.lab_password')
             </label>
             <div class="relative text-gray-400"><span class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-asterisk"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M12 8v8"></path><path d="m8.5 14 7-4"></path><path d="m8.5 10 7 4"></path></svg></span> 
-                <input type="password" name="password" id="password" placeholder="••••••••••" class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" autocomplete="new-password" />
+                <input type="password" name="password" id="password" placeholder="••••••••••" class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" />
             </div>
+            @error('password')
+                <div class="text-red-500 font-bold">{{ $message }}</div>
+            @enderror
         </div>
 
         {{-- FOTO DE PERFIL --}}

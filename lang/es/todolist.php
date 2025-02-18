@@ -28,6 +28,7 @@
         'lab_email'     => 'Email',
         'lab_password'  => 'Password',
         'lab_perfil'    => 'Foto de perfil',
+        'lab_twitter'   => 'Usuario de X',
 
 
         # mensajes
@@ -39,5 +40,9 @@
 
         # placeholders
         'hol_nueva_etiqueta'    => 'Nombre de la etiqueta',
+
+
+        # reglas de validación personalizadas
+        'twitter'               => 'El nombre de usuario no es correcto',
 
     ] ;

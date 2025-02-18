@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage ;
 
+use Illuminate\Validation\Rule ;
+use Illuminate\Validation\Rules\File ;
+use Illuminate\Validation\Rules\Password ;
+
+use App\Rules\Twitter ;
+
 class UsuarioController extends Controller
 {
     //
@@ -22,17 +28,27 @@ class UsuarioController extends Controller
                 'nombre'    => 'required|string',
                 'apellidos' => 'required|string',
                 'email'     => 'required|email',
-                'password'  => 'string|nullable',
-                'foto'      => 'image|max:1024|mimes:jpg,png',
+                'password'  => ['string', 'nullable', Password::min(10)],
+                'foto'      => ['image',
+                                File::types(['jpg', 'png'])->max("1mb") ],                    
+
+                'twitter'   => [ new Twitter ],
             ]);        
 
         # actualizamos el registro
         $request->user()->update([
             'nombre'    => $request->input('nombre'),
             'apellidos' => $request->input('apellidos'),
-            'email'     => $request->input('email'),
-            'password'  => Hash::make($request->input('password')),            
+            'email'     => $request->input('email'),            
         ]) ;
+
+        # actualizamos la contraseña
+        $password = $request->input('password') ;
+        
+        if ($password!=null):           
+            $request->user()->password = Hash::make($password) ;
+            $request->user()->save() ;                
+        endif ;
 
 
         # si estamos recibiendo una foto...
@@ -64,15 +80,35 @@ class UsuarioController extends Controller
      */
     public function imagen(Request $request) 
     {
-        # FORMA TRADICIONAL CON PHP
-        # recuperamos la ruta de acceso a la imagen
-        $ruta = storage_path("app/private/imagenes/{$request->user()->foto}") ;
+        # FORMA TRADICIONAL CON PHP #############################################
+        # recuperamos la ruta de acceso a la imagen desde la carpeta STORAGE
+        #$ruta = storage_path("app/private/imagenes/{$request->user()->foto}") ;
 
         # recuperamos la imagen
-        $file = file_get_contents($ruta) ;
-
+        #if (file_exists($ruta)) $file = file_get_contents($ruta) ;
+       
         # devolvemos una respuesta con la imagen
-        return response($file)->header('Content-Type', 'image/jpg') ;
+        #return response($file)->header('Content-Type', 'image/jpg') ;
+
+        # UTILIZANDO LA CLASE STORAGE ###########################################
+        # construimos la ruta a partir de la carpeta PRIVATE
+        $ruta = "/imagenes/{$request->user()->foto}" ;
+
+        # recuperamos la imagen
+        #$file = Storage::get($ruta) ;
+
+        # recuperamos el tipo MIME de la imagen
+        #$tipoMIME = Storage::mimeType($ruta) ;
+
+        # enviamos la respuesta con la imagen indicando en la cabecera
+        # del paquete HTTP que el contenido es una imagen del tipo MIME
+        # indicado.
+        #return response($file)->header('Content-Type', $tipoMIME) ;
+
+        # OTRO MÉTODO MÁS (by Sergio Gámez) ####################################
+        # el método file recibe la ruta absoluta al archivo y lo envía
+        # al navegador para que éste lo muestre de forma apropiada
+        return response()->file(Storage::path($ruta)) ;
     }
 
 }

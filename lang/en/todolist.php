@@ -25,4 +25,8 @@
         # placeholders
         'hol_nueva_etiqueta'    => 'Tag name',
 
+
+        # reglas de validación personalizadas
+        'twitter'               => 'Incorrect username ',
+
     ] ;
