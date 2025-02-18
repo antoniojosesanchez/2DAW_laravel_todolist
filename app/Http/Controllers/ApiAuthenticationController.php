@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Desarrollo Web en Entorno Servidor
+ * @author Antonio J. Sánchez Bujaldón
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

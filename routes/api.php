@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Desarrollo Web en Entorno Servidor
+ * @author Antonio J. Sánchez Bujaldón
+ */
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
