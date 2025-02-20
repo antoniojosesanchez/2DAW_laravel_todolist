@@ -30,9 +30,12 @@
             
             {{-- color de la etiqueta --}}
             <div class="flex flex-col">
-                <input type="color" id="color" name="color" 
+                <!--<input type="color" id="color" name="color" 
                        class="mt-1 w-16 h-10 border rounded-md cursor-pointer p-1"
-                       value="{{ $etiqueta->color }}" />
+                       value="{{ $etiqueta->color }}" />-->
+                <x-colores-etiqueta 
+                    class="border rounded-md cursor-pointer p-1"
+                    name="color" :seleccionado="$etiqueta->color" />
             </div>
         </div>
         
@@ -72,6 +75,27 @@
     </div>
     @enderror
 </div>
+
+@php
+    $hayError = false ;
+    $componente = $hayError?"alerta":""
+@endphp
+
+
+
+
+<x-dynamic-component :component="$componente" />
+
+
+
+
+@if($hayError)
+<x-alerta tipo="error">
+    <x-slot:cabecera>Cabecera del Mensaje de error</x-slot:cabecera>
+    <strong>Esto es un mensaje de error</strong><br/>
+    <a href="">volver</a>
+</x-alerta>
+@endif
 
 @endsection
 

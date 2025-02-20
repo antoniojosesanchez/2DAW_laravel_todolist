@@ -29,7 +29,19 @@
             
             {{-- color de la etiqueta --}}
             <div class="flex flex-col">
-                <input type="color" id="color" name="color" class="mt-1 w-16 h-10 border rounded-md cursor-pointer p-1">
+
+                @php
+
+                    $colores = ["Rosa"   => "e75480", "Azul"     => "0000ff",
+                                "Verde"  => "00ff00", "Amarillo" => "ffff00",
+                                "Morado" => "9b59b6", "Marrón"   => "804000",
+                                "Negro"  => "000000", "Rojo"     => "ff0000",
+                                "Blanco" => "ffffff", "Magenta"  => "ff00ff",
+                                "Gris"   => "666666", "Naranja"  => "ff8000", ] ;
+                @endphp
+
+                <!--<input type="color" id="color" name="color" class="mt-1 w-16 h-10 border rounded-md cursor-pointer p-1">-->
+                <x-colores-etiqueta nombre="color" :$colores />
             </div>
         </div>
         
